@@ -8,21 +8,12 @@ export type AmplifyDependentResourcesAttributes = {
             "UserPoolName": "string",
             "AppClientIDWeb": "string",
             "AppClientID": "string"
-        },
-        "userPoolGroups": {
-            "SignUpsGroupRole": "string"
         }
     },
     "api": {
         "reservationsystem": {
             "GraphQLAPIIdOutput": "string",
             "GraphQLAPIEndpointOutput": "string"
-        }
-    },
-    "storage": {
-        "imageStorage": {
-            "BucketName": "string",
-            "Region": "string"
         }
     }
 }

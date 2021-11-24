@@ -57,15 +57,22 @@ function App() {
 
     return (
         <div className="App">
-            <h1>Team 11: Reservation System</h1>
-
-            {/*Button to view account points*/}
+            <h1>Team 11: Reservation S</h1>
+            <input
+                onChange={e => setFormData({ ...formData, 'name': e.target.value })}
+                placeholder="Note name"
+                value={formData.name}
+            />
+            <input
+                onChange={e => setFormData({ ...formData, 'description': e.target.value })}
+                placeholder="Note description"
+                value={formData.description}
+            />
+            <input
+                type="file"
+                onChange={onChange}
+            />
             <button onClick={createNote}>Create Reservation</button>
-
-            {/*Button to create a reservation*/}
-            <button onClick={createNote}>View Points</button>
-
-
             <div style={{ marginBottom: 30 }}>
                 {
                     notes.map(note => (

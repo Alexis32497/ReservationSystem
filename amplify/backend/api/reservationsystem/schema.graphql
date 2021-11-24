@@ -1,6 +1,20 @@
-type Note @model @auth(rules: [{allow: owner },{allow: owner,  ownerField: "editors", operations: [update,read] } ]) {
+type reservation 
+	@model 
+	@auth(
+		rules: [
+			#allow admins to view reservations
+			{allow: groups, groups:["admin"]}
+
+			#allow all authenticated users to create and view points
+			{allow: private, operations:[read]}
+
+			#allow guest users to create a reservation
+			{allow: public, operations: [read], provider: iam}
+
+		]
+	){
   id: ID!
   name: String!
+  date: String
   description: String
-  image: String
 }
