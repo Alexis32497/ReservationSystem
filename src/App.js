@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import { API, Storage } from 'aws-amplify';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
-import { listTodos } from './graphql/queries';
-import { createTodo as createNoteMutation, deleteTodo as deleteNoteMutation } from './graphql/mutations';
+import { listReservations } from './graphql/queries';
+import { createReservation as createReservationMutation, deleteReservation as deleteNoteMutation } from './graphql/mutations';
 
 
 
-const initialFormState = { name: '', description: '' }
+const initialFormState = {name: '', date: '', numberofPeople: ''}
 
 function App() {
     const [notes, setNotes] = useState([]);
@@ -18,25 +18,13 @@ function App() {
     }, []);
 
     async function fetchNotes() {
-        const apiData = await API.graphql({ query: listTodos });
-        const notesFromAPI = apiData.data.listTodos.items;
-        await Promise.all(notesFromAPI.map(async note => {
-            if (note.image) {
-                const image = await Storage.get(note.image);
-                note.image = image;
-            }
-            return note;
-        }))
-        setNotes(apiData.data.listTodos.items);
+        const apiData = await API.graphql({ query: listReservations });
+        setNotes(apiData.data.listReservations.items);
     }
 
-    async function createNote() {
+    async function createReservationForm() {
         if (!formData.name || !formData.description) return;
-        await API.graphql({ query: createNoteMutation, variables: { input: formData } });
-        if (formData.image) {
-            const image = await Storage.get(formData.image);
-            formData.image = image;
-        }
+        await API.graphql({ query: createReservationMutation, variables: { input: formData } });
         setNotes([...notes, formData]);
         setFormData(initialFormState);
     }
@@ -47,23 +35,53 @@ function App() {
         await API.graphql({ query: deleteNoteMutation, variables: { input: { id } } });
     }
 
-    async function onChange(e) {
-        if (!e.target.files[0]) return
-        const file = e.target.files[0];
-        setFormData({ ...formData, image: file.name });
-        await Storage.put(file.name, file);
-        fetchNotes();
-    }
-
     return (
         <div className="App">
             <h1>Team 11: Reservation System</h1>
 
-            {/*Button to view account points*/}
-            <button onClick={createNote}>Create Reservation</button>
+ {/*Reservation[ANY USER] Part of the Code */}
+            <input
+            onChange={e => setFormData({...formData,'name':e.target.value})}
+            placeholder = "Name"
+            value={formData.name}
+            />
 
-            {/*Button to create a reservation*/}
-            <button onClick={createNote}>View Points</button>
+            <div>
+            </div>
+
+            <input
+                onChange={e => setFormData({ ...formData, 'date': e.target.value })}
+                placeholder="Date"
+                value={formData.date}
+            />
+
+            <div>
+            </div>
+
+            <input
+                onChange={e => setFormData({ ...formData, 'numberofPeople': e.target.value })}
+                placeholder="Number of People"
+                value={formData.numberofPeople}
+            />
+
+            <div>
+            </div>
+
+            <button onClick={createReservationForm}>Create Reservation</button>
+
+            <div>
+            </div>
+
+{/*View Points[REGULAR USERS ONLY] Part of the Code*/}
+
+            <button onClick={createReservationForm}>View Points</button>
+
+            <div>
+            </div>
+
+ {/*View Reservations Part of the Code [ADMIN USERS]*/}
+
+            <button onClick={createReservationForm}>View Reservations</button>
 
 
             <div style={{ marginBottom: 30 }}>

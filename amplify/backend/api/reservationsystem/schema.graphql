@@ -3,18 +3,35 @@ type reservation
 	@auth(
 		rules: [
 			#allow admins to view reservations
-			{allow: groups, groups:["admin"]}
+			{allow: groups, groups:["Admins"]}
 
 			#allow all authenticated users to create and view points
-			{allow: private, operations:[read]}
+			{allow: groups, groups:["NormalUsers"], operations:[create]}
 
 			#allow guest users to create a reservation
-			{allow: public, operations: [read], provider: iam}
+			{allow: groups, groups:["guest"], operations: [create]}
 
 		]
 	){
-	ID: ID!
 	name: String!
 	date: String
 	numberOfPeople: Int
+}
+
+
+type loyaltyPoints 
+	@model
+	@auth(
+	rules: [
+			#allow admins to view reservations
+			{allow: groups, groups:["Admins"]}
+
+			#allow all authenticated users to create and view points
+			{allow: groups, groups:["NormalUsers"], operations:[create]}
+
+			#allow guest users to create a reservation
+
+			]
+		){
+		points: Int
 }
