@@ -13,8 +13,8 @@ type reservation
 
 		]
 	){
-  id: ID!
-  name: String!
-  date: String
-  description: String
+	ID: ID!
+	name: String!
+	date: String
+	numberOfPeople: Int
 }
