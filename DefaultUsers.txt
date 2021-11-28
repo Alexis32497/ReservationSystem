@@ -1,0 +1,16 @@
+Admin
+
+username: admin
+password: admin1234
+
+
+Guest
+
+username: guest
+password: guest1234
+
+
+NormalUser
+
+username: user1234
+password: user1234
