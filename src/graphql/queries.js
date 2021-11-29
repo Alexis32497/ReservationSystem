@@ -6,8 +6,11 @@ export const getReservation = /* GraphQL */ `
     getReservation(id: $id) {
       id
       name
+      phone
       date
+      time
       numberOfPeople
+      email
       _version
       _deleted
       _lastChangedAt
@@ -26,8 +29,11 @@ export const listReservations = /* GraphQL */ `
       items {
         id
         name
+        phone
         date
+        time
         numberOfPeople
+        email
         _version
         _deleted
         _lastChangedAt
@@ -55,8 +61,11 @@ export const syncReservations = /* GraphQL */ `
       items {
         id
         name
+        phone
         date
+        time
         numberOfPeople
+        email
         _version
         _deleted
         _lastChangedAt
