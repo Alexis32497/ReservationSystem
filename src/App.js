@@ -7,7 +7,7 @@ import { createReservation as createReservationMutation, deleteReservation as de
 
 
 
-const initialFormState = {name: '', date: '', numberofPeople: ''}
+const initialFormState = {name: '', phone: '', date: '', time: '', numberofPeople: '', email: ''}
 
 function App() {
     const [notes, setNotes] = useState([]);
@@ -50,6 +50,15 @@ function App() {
             </div>
 
             <input
+                onChange={e => setFormData({ ...formData, 'phone': e.target.value })}
+                placeholder="Phone"
+                value={formData.phone}
+            />
+
+            <div>
+            </div>
+
+            <input
                 onChange={e => setFormData({ ...formData, 'date': e.target.value })}
                 placeholder="Date"
                 value={formData.date}
@@ -59,9 +68,27 @@ function App() {
             </div>
 
             <input
+                onChange={e => setFormData({ ...formData, 'time': e.target.value })}
+                placeholder="Time"
+                value={formData.time}
+            />
+
+            <div>
+            </div>
+
+            <input
                 onChange={e => setFormData({ ...formData, 'numberofPeople': e.target.value })}
                 placeholder="Number of People"
                 value={formData.numberofPeople}
+            />
+
+            <div>
+            </div>
+
+            <input
+                onChange={e => setFormData({ ...formData, 'email': e.target.value })}
+                placeholder="Email"
+                value={formData.email}
             />
 
             <div>
@@ -85,18 +112,7 @@ function App() {
 
 
             <div style={{ marginBottom: 30 }}>
-                {
-                    notes.map(note => (
-                        <div key={note.id || note.name}>
-                            <h2>{note.name}</h2>
-                            <p>{note.description}</p>
-                            <button onClick={() => deleteNote(note)}>Delete note</button>
-                            {
-                                note.image && <img src={note.image} alt=" " style={{ width: 400 }} />
-                            }
-                        </div>
-                    ))
-                }
+                
             </div>
             <AmplifySignOut />
         </div>

@@ -2,10 +2,10 @@ type reservation
 	@model 
 	@auth(
 		rules: [
-			#allow admins to view reservations
+			#allow admins to have full access to reservations
 			{allow: groups, groups:["Admins"]}
 
-			#allow all authenticated users to create and view points
+			#allow all authenticated users to create reservation
 			{allow: groups, groups:["NormalUsers"], operations:[create]}
 
 			#allow guest users to create a reservation
@@ -14,8 +14,11 @@ type reservation
 		]
 	){
 	name: String!
+	phone: String
 	date: String
+	time: String
 	numberOfPeople: Int
+	email: String
 }
 
 
@@ -23,13 +26,11 @@ type loyaltyPoints
 	@model
 	@auth(
 	rules: [
-			#allow admins to view reservations
+			#allow admins to have full access to points
 			{allow: groups, groups:["Admins"]}
 
-			#allow all authenticated users to create and view points
-			{allow: groups, groups:["NormalUsers"], operations:[create]}
-
-			#allow guest users to create a reservation
+			#allow all authenticated view points
+			{allow: groups, groups:["NormalUsers"], operations:[read]}
 
 			]
 		){

@@ -9,8 +9,11 @@ export const createReservation = /* GraphQL */ `
     createReservation(input: $input, condition: $condition) {
       id
       name
+      phone
       date
+      time
       numberOfPeople
+      email
       _version
       _deleted
       _lastChangedAt
@@ -27,8 +30,11 @@ export const updateReservation = /* GraphQL */ `
     updateReservation(input: $input, condition: $condition) {
       id
       name
+      phone
       date
+      time
       numberOfPeople
+      email
       _version
       _deleted
       _lastChangedAt
@@ -45,8 +51,11 @@ export const deleteReservation = /* GraphQL */ `
     deleteReservation(input: $input, condition: $condition) {
       id
       name
+      phone
       date
+      time
       numberOfPeople
+      email
       _version
       _deleted
       _lastChangedAt

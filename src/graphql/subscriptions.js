@@ -6,8 +6,11 @@ export const onCreateReservation = /* GraphQL */ `
     onCreateReservation {
       id
       name
+      phone
       date
+      time
       numberOfPeople
+      email
       _version
       _deleted
       _lastChangedAt
@@ -21,8 +24,11 @@ export const onUpdateReservation = /* GraphQL */ `
     onUpdateReservation {
       id
       name
+      phone
       date
+      time
       numberOfPeople
+      email
       _version
       _deleted
       _lastChangedAt
@@ -36,8 +42,11 @@ export const onDeleteReservation = /* GraphQL */ `
     onDeleteReservation {
       id
       name
+      phone
       date
+      time
       numberOfPeople
+      email
       _version
       _deleted
       _lastChangedAt
